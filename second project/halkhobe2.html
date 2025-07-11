@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حال خوب روزانه | انگیزشی ایرانی</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa, #f8bbd0, #d1c4e9);
+            overflow: hidden;
+            height: 100vh;
+            margin: 0;
+            perspective: 1000px;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        .floating-2 {
+            animation: floating 4s ease-in-out infinite;
+            animation-delay: 0.5s;
+        }
+        
+        .floating-3 {
+            animation: floating 5s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(31, 38, 135, 0.3);
+        }
+        
+        .glass-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .message-box {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transform: scale(0);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .message-box.show {
+            transform: scale(1);
+        }
+        
+        .animal {
+            animation: bounce 2s infinite ease-in-out;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0;
+            animation: particle-anim 1.5s ease-out forwards;
+        }
+        
+        @keyframes particle-anim {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(0.5);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(1.5);
+            }
+        }
+        
+        .sun {
+            animation: sun-glow 4s infinite alternate;
+        }
+        
+        @keyframes sun-glow {
+            0% { box-shadow: 0 0 50px 20px rgba(255, 255, 200, 0.5); }
+            100% { box-shadow: 0 0 70px 30px rgba(255, 255, 200, 0.8); }
+        }
+        
+        .cloud {
+            animation: cloud-drift 30s linear infinite;
+        }
+        
+        @keyframes cloud-drift {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .butterfly {
+            animation: butterfly-fly 15s linear infinite;
+        }
+        
+        @keyframes butterfly-fly {
+            0% { transform: translateX(100vw) translateY(0); }
+            100% { transform: translateX(-100vw) translateY(100px); }
+        }
+    </style>
+</head>
+<body class="relative overflow-hidden">
+    <div class="absolute inset-0">
+        <div class="sun absolute top-10 left-10 w-24 h-24 rounded-full bg-yellow-200"></div>
+        
+        <div class="cloud absolute top-20 w-40 h-20 bg-white rounded-full opacity-80"></div>
+        <div class="cloud absolute top-40 right-20 w-32 h-16 bg-white rounded-full opacity-80" style="animation-delay: -10s;"></div>
+        <div class="cloud absolute top-60 left-1/4 w-36 h-18 bg-white rounded-full opacity-80" style="animation-delay: -20s;"></div>
+        
+        <div class="floating absolute top-1/4 left-1/4 text-4xl text-pink-500">🌸</div>
+        <div class="floating-2 absolute top-1/3 right-1/3 text-3xl text-yellow-500">🌼</div>
+        <div class="floating-3 absolute top-1/2 left-1/3 text-5xl text-purple-500">🌺</div>
+        <div class="floating absolute top-2/3 right-1/4 text-4xl text-red-500">🌹</div>
+        
+        <div class="butterfly absolute top-1/4 text-3xl" style="animation-delay: -5s;">🦋</div>
+        <div class="butterfly absolute top-1/2 text-2xl" style="animation-delay: -10s;">🦋</div>
+        <div class="butterfly absolute top-2/3 text-3xl" style="animation-delay: -15s;">🦋</div>
+        
+        <div class="absolute bottom-0 w-full h-40 bg-green-300 rounded-t-full"></div>
+        <div class="absolute bottom-0 w-full h-24 bg-green-400 rounded-t-full"></div>
+    </div>
+    
+    <div class="relative min-h-screen flex flex-col items-center justify-center z-10 px-4">
+        <h1 class="text-3xl md:text-4xl font-bold text-center text-white drop-shadow-lg mb-8">
+            <span class="bg-gradient-to-r from-pink-500 to-purple-600 text-transparent bg-clip-text">حال خوب روزانه</span>
+        </h1>
+        
+        <div class="relative">
+            <button id="feel-good-btn" class="glass-btn text-xl md:text-2xl font-bold py-6 px-12 rounded-2xl text-white flex items-center justify-center gap-2">
+                <i class="fas fa-heart text-red-400"></i>
+                یه حال خوب بده بهم
+                <i class="fas fa-heart text-red-400"></i>
+            </button>
+        </div>
+        
+        <div id="message-container" class="message-box mt-12 p-6 max-w-md text-center">
+            <div class="flex flex-col items-center">
+                <div id="animal" class="animal text-6xl mb-4">🐱</div>
+                <p id="motivational-message" class="text-xl md:text-2xl font-bold text-purple-800"></p>
+            </div>
+            <button id="close-btn" class="mt-6 bg-pink-500 hover:bg-pink-600 text-white py-2 px-6 rounded-full transition">
+                بستن
+            </button>
+        </div>
+    </div>
+    
+    <div id="particles-container" class="absolute inset-0 pointer-events-none"></div>
+    
+    <script>
+        const messages = [
+            "تو فوق‌العاده‌ای! دنیا به وجودت نیاز داره ❤️",
+            "هر روزت پر از نور و انرژی مثبت باشه ☀️",
+            "تو قوی‌تر از اونی هستی که فکر می‌کنی 💪",
+            "نگاهت به زندگی، زیبایی‌های بیشتری خلق می‌کنه 🌈",
+            "تو یه ستاره‌ای، همیشه درخشنده باش 🌟",
+            "هر لحظه‌ات پر از عشق و شادی باشه 💖",
+            "تو توانایی انجام هر کاری رو داری، فقط باور کن! ✨",
+            "زندگی با وجود تو زیباتر و پرانرژی‌تره 🌸",
+            "تو خاصی، همون‌طور که هستی فوق‌العاده‌ای! 🌺",
+            "همه‌ی دنیا منتظر دیدن نبوغ توست 🌍",
+            "تو منبع انرژی مثبت و عشق هستی 💫",
+            "هر روزت از روز قبل قشنگ‌تر و پربرکت‌تر باشه 🌼",
+            "تو لیاقت بهترین‌ها رو داری، همیشه بهش فکر کن 👑",
+            "نور وجودت دنیا رو روشن می‌کنه 💡",
+            "تو یه معجزه‌ی زیبا و بی‌نظیری 🌹",
+            "همه‌ی آرزوهات به زودی برآورده می‌شن 🌠",
+            "تو قادر به خلق هر چیزی هستی که دوست داری 🎨",
+            "همین الان هم فوق‌العاده‌ای، فقط کافیه باور کنی! 💯",
+            "زندگی پر از فرصت‌های زیباست که منتظر توست 🚪",
+            "تو شایسته‌ی بهترین عشق‌ها و احترام‌ها هستی 💞",
+            "همه‌ی دنیا به آدم‌هایی مثل تو نیاز داره 🌎",
+            "تو منبع الهام دیگرانی، همیشه درخشنده باش ✨",
+            "هر روزت پر از لحظه‌های شاد و به یاد موندنی باشه 🎉",
+            "تو قهرمان زندگی خودتی، همیشه پیروز باش 🏆",
+            "همه‌ی کائنات پشت توست، با اعتماد به نفس پیش برو 🌌",
+            "تو زیباترین نسخه‌ی خودتی، همون‌طور که هستی کامل هستی 🌸",
+            "همین الان هم در مسیر موفقیت هستی، ادامه بده! 🚀",
+            "تو توانایی تبدیل رویاها به واقعیت رو داری 💭",
+            "همه‌ی مشکلات فقط پله‌های پیشرفت تو هستن 📈",
+            "تو شایسته‌ی بهترین زندگی هستی، برایش تلاش کن 👑",
+            "همه‌ی قلب‌ها با دیدن تو پر از شادی میشه 💓",
+            "تو یه گنج بی‌نظیری، قدر خودت رو بدون 💎",
+            "هر روزت پر از کشف چیزهای جدید و زیبا باشه 🔍",
+            "تو منبع انرژی مثبت برای اطرافیانت هستی ⚡",
+            "همه‌ی دنیا منتظر دیدن نبوغ توست 🌟",
+            "تو توانایی تغییر دنیا رو داری، شروع کن! 🌍",
+            "همین الان هم در جایگاه درست قرار داری 🙏",
+            "تو شایسته‌ی عشق بی‌قید و شرط هستی 💖",
+            "همه‌ی آرزوهات در حال برآورده شدنه 🌠",
+            "تو یه قهرمان بی‌صدا هستی که دنیا رو نجات میدی 🦸‍♀️",
+            "هر روزت پر از لحظه‌های جادویی باشه ✨",
+            "تو توانایی خلق معجزه رو داری، فقط شروع کن! 🌈",
+            "همه‌ی کائنات برای موفقیت تو برنامه‌ریزی کرده 🌌",
+            "تو منبع الهام دیگرانی، همیشه درخشنده باش 💫",
+            "همین الان هم در مسیر درست قرار داری 🛣️",
+            "تو شایسته‌ی بهترین فرصت‌ها و موقعیت‌ها هستی 🎁",
+            "همه‌ی قلب‌ها با دیدن تو پر از عشق میشه 💞",
+            "تو یه ستاره‌ی درخشان در آسمان زندگی هستی 🌠"
+        ];
+        
+        const animals = ["🐱", "🐰", "🐶", "🐻", "🐼", "🦊", "🐯", "🦁", "🐮", "🐹"];
+        
+        const feelGoodBtn = document.getElementById('feel-good-btn');
+        const messageContainer = document.getElementById('message-container');
+        const motivationalMessage = document.getElementById('motivational-message');
+        const animalElement = document.getElementById('animal');
+        const closeBtn = document.getElementById('close-btn');
+        const particlesContainer = document.getElementById('particles-container');
+        
+        const particles = ["❤️", "💖", "💕", "💓", "💗", "💘", "💝", "✨", "🌟", "⭐", "💫", "🎉", "🎊", "🌸", "🌺", "🌼", "🌷", "🌹", "💐", "🥰"];
+        
+        function createExplosion() {
+            particlesContainer.innerHTML = '';
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.innerHTML = particles[Math.floor(Math.random() * particles.length)];
+                particle.style.left = '50%';
+                particle.style.top = '50%';
+                particle.style.fontSize = Math.random() * 20 + 10 + 'px';
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 100 + Math.random() * 200;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                particle.style.setProperty('--tx', tx + 'px');
+                particle.style.setProperty('--ty', ty + 'px');
+                
+                particlesContainer.appendChild(particle);
+            }
+            
+            setTimeout(() => {
+                particlesContainer.innerHTML = '';
+            }, 1500);
+        }
+        
+        function showMotivationalMessage() {
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            const randomAnimal = animals[Math.floor(Math.random() * animals.length)];
+            
+            motivationalMessage.textContent = randomMessage;
+            animalElement.textContent = randomAnimal;
+            
+            messageContainer.classList.add('show');
+        }
+        
+        feelGoodBtn.addEventListener('click', () => {
+            createExplosion();
+            setTimeout(showMotivationalMessage, 500);
+        });
+        
+        closeBtn.addEventListener('click', () => {
+            messageContainer.classList.remove('show');
+        });
+        
+        document.querySelectorAll('.floating, .floating-2, .floating-3').forEach(el => {
+            el.style.left = Math.random() * 80 + 10 + '%';
+            el.style.top = Math.random() * 70 + 10 + '%';
+        });
+    </script>
+</body>
+</html>

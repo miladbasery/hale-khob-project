@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>یه حال خوب | انگیزشی</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #a5f3fc 0%, #f0abfc 50%, #fef08a 100%);
+            overflow-x: hidden;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .glass-btn {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 8px 32px rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(255, 255, 255, 0.5);
+        }
+        
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            animation: float-up 2s ease-out forwards;
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .message-box {
+            transform: scale(0);
+            animation: pop-up 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        
+        @keyframes pop-up {
+            0% {
+                transform: scale(0);
+            }
+            80% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .animal {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(-2deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+        }
+        
+        .flower {
+            position: absolute;
+            animation: sway 5s ease-in-out infinite;
+        }
+        
+        @keyframes sway {
+            0%, 100% {
+                transform: rotate(-5deg);
+            }
+            50% {
+                transform: rotate(5deg);
+            }
+        }
+        
+        .butterfly {
+            position: absolute;
+            animation: fly 15s linear infinite;
+        }
+        
+        @keyframes fly {
+            0% {
+                transform: translate(-100px, 100px) rotate(0deg);
+            }
+            100% {
+                transform: translate(calc(100vw + 100px), -100px) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body class="relative overflow-hidden flex items-center justify-center">
+    <div class="flower text-4xl" style="top: 10%; left: 5%;">🌸</div>
+    <div class="flower text-3xl" style="top: 20%; right: 15%;">🌼</div>
+    <div class="flower text-5xl" style="bottom: 15%; left: 10%;">🌺</div>
+    <div class="flower text-2xl" style="bottom: 25%; right: 5%;">🌻</div>
+    
+    <div class="butterfly text-3xl" style="top: 30%;">🦋</div>
+    <div class="butterfly text-2xl" style="top: 70%; animation-delay: 5s;">🦋</div>
+    
+    <div class="absolute top-10 left-10 text-5xl opacity-70">☁️</div>
+    <div class="absolute top-20 right-20 text-6xl opacity-60">☁️</div>
+    <div class="absolute bottom-20 left-1/4 text-4xl opacity-50">☁️</div>
+    
+    <div class="z-10 text-center px-4">
+        <button id="mainBtn" class="glass-btn bg-white/30 text-2xl md:text-3xl font-bold py-4 px-8 rounded-full text-pink-700 hover:text-pink-800">
+            یه حال خوب بده بهم  ❤️
+        </button>
+        
+        <div id="messageContainer" class="hidden mt-12">
+            <div class="message-box bg-white/40 backdrop-blur-md rounded-2xl p-6 max-w-md mx-auto shadow-xl">
+                <p id="motivationalMessage" class="text-2xl font-bold text-gray-800 mb-4"></p>
+                <div class="animal text-6xl">🐱</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const motivationalMessages = [
+            "تو فوق‌العاده‌ای! دنیا به وجودت نیاز داره ❤️",
+            "هر روزت پر از نور و انرژی مثبت باشه ☀️",
+            "تو قوی‌تر از اونی هستی که فکر می‌کنی 💪",
+            "نگاهت به زندگی، زیبایی‌های بیشتری خلق می‌کنه 🌈",
+            "تو یه ستاره‌ای، همیشه درخشنده باش 🌟",
+            "هر لحظه‌ات پر از عشق و شادی باشه 💖",
+            "تو توانایی انجام هر کاری رو داری، فقط باور کن! ✨",
+            "زندگی با وجود تو زیباتر و پرانرژی‌تره 🌸",
+            "تو خاصی، همون‌طور که هستی فوق‌العاده‌ای! 🌺",
+            "همه‌ی دنیا منتظر دیدن نبوغ توست 🌍",
+            "تو منبع انرژی مثبت و عشق هستی 💫",
+            "هر روزت از روز قبل قشنگ‌تر و پربرکت‌تر باشه 🌼",
+            "تو لیاقت بهترین‌ها رو داری، همیشه بهش فکر کن 👑",
+            "نور وجودت دنیا رو روشن می‌کنه 💡",
+            "تو یه معجزه‌ی زیبا و بی‌نظیری 🌹",
+            "همه‌ی آرزوهات به زودی برآورده می‌شن 🌠",
+            "تو قادر به خلق هر چیزی هستی که دوست داری 🎨",
+            "همین الان هم فوق‌العاده‌ای، فقط کافیه باور کنی! 💯",
+            "زندگی پر از فرصت‌های زیباست که منتظر توست 🚪",
+            "تو شایسته‌ی بهترین عشق‌ها و احترام‌ها هستی 💞",
+            "همه‌ی دنیا به آدم‌هایی مثل تو نیاز داره 🌎",
+            "تو منبع الهام دیگرانی، همیشه درخشنده باش ✨",
+            "هر روزت پر از لحظه‌های شاد و به یاد موندنی باشه 🎉",
+            "تو قهرمان زندگی خودتی، همیشه پیروز باش 🏆",
+            "همه‌ی کائنات پشت توست، با اعتماد به نفس پیش برو 🌌",
+            "تو زیباترین نسخه‌ی خودتی، همون‌طور که هستی کامل هستی 🌸",
+            "همین الان هم در مسیر موفقیت هستی، ادامه بده! 🚀",
+            "تو توانایی تبدیل رویاها به واقعیت رو داری 💭",
+            "همه‌ی مشکلات فقط پله‌های پیشرفت تو هستن 📈",
+            "تو شایسته‌ی بهترین زندگی هستی، برایش تلاش کن 👑",
+            "همه‌ی قلب‌ها با دیدن تو پر از شادی میشه 💓",
+            "تو یه گنج بی‌نظیری، قدر خودت رو بدون 💎",
+            "هر روزت پر از کشف چیزهای جدید و زیبا باشه 🔍",
+            "تو منبع انرژی مثبت برای اطرافیانت هستی ⚡",
+            "همه‌ی دنیا منتظر دیدن نبوغ توست 🌟",
+            "تو توانایی تغییر دنیا رو داری، شروع کن! 🌍",
+            "همین الان هم در جایگاه درست قرار داری 🙏",
+            "تو شایسته‌ی عشق بی‌قید و شرط هستی 💖",
+            "همه‌ی آرزوهات در حال برآورده شدنه 🌠",
+            "تو یه قهرمان بی‌صدا هستی که دنیا رو نجات میدی 🦸‍♀️",
+            "هر روزت پر از لحظه‌های جادویی باشه ✨",
+            "تو توانایی خلق معجزه رو داری، فقط شروع کن! 🌈",
+            "همه‌ی کائنات برای موفقیت تو برنامه‌ریزی کرده 🌌",
+            "تو منبع الهام دیگرانی، همیشه درخشنده باش 💫",
+            "همین الان هم در مسیر درست قرار داری 🛣️",
+            "تو شایسته‌ی بهترین فرصت‌ها و موقعیت‌ها هستی 🎁",
+            "همه‌ی قلب‌ها با دیدن تو پر از عشق میشه 💞",
+            "تو یه ستاره‌ی درخشان در آسمان زندگی هستی 🌠"
+        ];
+        
+        const emojis = ['❤️', '✨', '🌟', '🥰', '💫', '🌠', '💖', '🦄', '🌈', '🌸'];
+        
+        const mainBtn = document.getElementById('mainBtn');
+        const messageContainer = document.getElementById('messageContainer');
+        const motivationalMessage = document.getElementById('motivationalMessage');
+        
+        mainBtn.addEventListener('click', function() {
+            for (let i = 0; i < 30; i++) {
+                createParticle();
+            }
+            
+            const randomMessage = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
+            motivationalMessage.textContent = randomMessage;
+            
+            mainBtn.classList.add('hidden');
+            messageContainer.classList.remove('hidden');
+            
+            const animals = ['🐱', '🐰', '🐻', '🐶', '🦊', '🐭'];
+            const randomAnimal = animals[Math.floor(Math.random() * animals.length)];
+            document.querySelector('.animal').textContent = randomAnimal;
+            
+            setTimeout(() => {
+                messageContainer.classList.add('hidden');
+                mainBtn.classList.remove('hidden');
+            }, 5000);
+        });
+        
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.top = `${50 + Math.random() * 20}vh`;
+            particle.style.fontSize = `${Math.random() * 20 + 10}px`;
+            particle.style.animationDuration = `${Math.random() * 2 + 1}s`;
+            
+            document.body.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
